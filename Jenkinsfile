@@ -3,7 +3,7 @@ pipeline {
     parameters {
         choice(
             name: 'action',
-            choices: ['full_build','normal_build'],
+            choices: ['full_build','normal_build','cleanup'],
             description: "Choose apply to create resoures, destroy to tear them down"
         )
         choice(
@@ -20,8 +20,6 @@ pipeline {
             }
             steps {
                 echo 'Building Ranger (full)...'
-                sh 'pwd'
-                sh 'ls -l build_ranger_using_docker.sh'
                 sh './build_ranger_using_docker.sh'
             }
         }
@@ -31,7 +29,16 @@ pipeline {
             }
             steps {
                 echo 'Building Ranger (normal)...'
-                sh 'build_ranger_using_docker.sh mvn -Pall clean install -DskipTests=true'
+                sh './build_ranger_using_docker.sh mvn -Pall clean install -DskipTests=true'
+            }
+        }
+        stage('Rebuild Image and Output') {
+            when {
+                expression {params.action == 'cleanup'}
+            }
+            steps {
+                echo 'Building Ranger (cleanup)...'
+                sh './build_ranger_using_docker.sh -build_image mvn clean'
             }
         }
 /*        stage('Deploy to Lab') {
