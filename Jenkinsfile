@@ -21,8 +21,8 @@ pipeline {
             steps {
                 echo 'Building Ranger (full)...'
                 sh 'pwd'
-                sh 'ls -lrta'
-//                sh 'build_ranger_using_docker.sh'
+                sh 'ls -l build_ranger_using_docker.sh'
+                sh './build_ranger_using_docker.sh'
             }
         }
         stage('Normal Build') {
@@ -34,7 +34,7 @@ pipeline {
                 sh 'build_ranger_using_docker.sh mvn -Pall clean install -DskipTests=true'
             }
         }
-        stage('Deploy to Lab') {
+/*        stage('Deploy to Lab') {
             when {
                 expression {params.environment == 'lab'}
             }
@@ -67,5 +67,6 @@ pipeline {
                 }
             }
         }
+*/
     }
 }
