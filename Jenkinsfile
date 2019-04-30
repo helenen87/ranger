@@ -50,7 +50,7 @@ pipeline {
                 expression {params.environment == 'nonprod'}
             }
             steps {
-                echo 'Deploying to nonprod account.."
+                echo 'Deploying to nonprod account..'
                 withAWS([role: 'arn:aws:iam::237901581861:role/endplatgnda-nonprod-iamr-bmx', region: 'us-west-2']) {
                   s3Upload(file:'target', bucket:'adapt-sandbox-shared-s3-us-west-2', path:'/ranger/target/')
                 }
@@ -61,7 +61,7 @@ pipeline {
                 expression {params.environment == 'prod'}
             }
             steps {
-                echo 'Deploying to prod account.."
+                echo 'Deploying to prod account..'
                 withAWS([role: 'arn:aws:iam::857069700355:role/endplatgnda-prod-iamr-bmx', region: 'us-west-2']) {
                   s3Upload(file:'target', bucket:'adapt-sandbox-shared-s3-us-west-2', path:'/ranger/target/')
                 }
