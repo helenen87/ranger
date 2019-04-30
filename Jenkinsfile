@@ -39,7 +39,7 @@ pipeline {
                 expression {params.environment == 'lab'}
             }
             steps {
-                echo 'Deploying to lab account.."
+                echo 'Deploying to lab account..'
                 withAWS([role: 'arn:aws:iam::701603852992:role/endplatgnda-sandbox-iamr-bmx', region: 'us-west-2']) {
                   s3Upload(file:'target', bucket:'adapt-sandbox-shared-s3-us-west-2', path:'/ranger/target/')
                 }
