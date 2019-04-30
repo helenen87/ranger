@@ -20,7 +20,9 @@ pipeline {
             }
             steps {
                 echo 'Building Ranger (full)...'
-                sh 'build_ranger_using_docker.sh'
+                sh 'pwd'
+                sh 'ls -lrta'
+//                sh 'build_ranger_using_docker.sh'
             }
         }
         stage('Normal Build') {
