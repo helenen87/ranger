@@ -28,8 +28,6 @@ pipeline {
                 expression {params.action == 'normal_build'}
             }
             steps {
-                pwd
-                ls -lrta
                 echo 'Building Ranger (normal)...'
                 sh 'build_ranger_using_docker.sh mvn -Pall clean install -DskipTests=true'
             }
