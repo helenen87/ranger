@@ -14,13 +14,14 @@ pipeline {
      }
 
     stages {
-        stage('Default Build') {
+        stage('Full Build') {
             when {
                 expression {params.action == 'full_build'}
             }
             steps {
                 echo 'Building Ranger (full)...'
                 sh './build_ranger_using_docker.sh'
+                sh 'ls -l target/'
             }
         }
         stage('Normal Build') {
@@ -30,18 +31,20 @@ pipeline {
             steps {
                 echo 'Building Ranger (normal)...'
                 sh './build_ranger_using_docker.sh mvn -Pall clean install -DskipTests=true'
+                sh 'ls -l target/'
             }
         }
-        stage('Rebuild Image and Output') {
+        stage('Cleanup') {
             when {
                 expression {params.action == 'cleanup'}
             }
             steps {
                 echo 'Building Ranger (cleanup)...'
                 sh './build_ranger_using_docker.sh -build_image mvn clean'
+                sh 'ls -l target/'
             }
         }
-/*        stage('Deploy to Lab') {
+        stage('Deploy to Lab') {
             when {
                 expression {params.environment == 'lab'}
             }
@@ -74,6 +77,6 @@ pipeline {
                 }
             }
         }
-*/
+
     }
 }
