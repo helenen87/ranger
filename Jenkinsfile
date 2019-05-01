@@ -48,7 +48,6 @@ pipeline {
             steps {
                 echo 'Building Ranger (cleanup)...'
                 sh './build_ranger_using_docker.sh -build_image mvn clean'
-                sh 'ls -l target/'
             }
         }
         stage('Deploy to Lab') {
