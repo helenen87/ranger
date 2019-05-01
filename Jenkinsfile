@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    tools {
+//    tools {
 //        jdk 'jdk8'
-    }
+//    }
     parameters {
         choice(
             name: 'action',
