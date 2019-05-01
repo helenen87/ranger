@@ -53,7 +53,7 @@ pipeline {
         }
         stage('Deploy to Lab') {
             when {
-                expression {params.environment == 'lab'}
+                expression {params.environment == 'lab' && params.action != 'cleanup'}
             }
             steps {
                 echo 'Deploying to lab account..'
@@ -64,7 +64,7 @@ pipeline {
         }
         stage('Deploy to Nonprod') {
             when {
-                expression {params.environment == 'nonprod'}
+                expression {params.environment == 'nonprod' && params.action != 'cleanup'}
             }
             steps {
                 echo 'Deploying to nonprod account..'
@@ -75,7 +75,7 @@ pipeline {
         }
         stage('Deploy to Prod') {
             when {
-                expression {params.environment == 'prod'}
+                expression {params.environment == 'prod' && params.action != 'cleanup'}
             }
             steps {
                 echo 'Deploying to prod account..'
