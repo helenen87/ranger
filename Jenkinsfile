@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    tools {
-        jdk 'jdk9'
-    }
+//    tools {
+//        jdk 'jdk9'
+//    }
     parameters {
         choice(
             name: 'action',
@@ -15,7 +15,6 @@ pipeline {
             description: "Choose the destination account"
         )
      }
-
     stages {
         stage('Checkout') {
             steps {
