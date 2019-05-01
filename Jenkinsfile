@@ -14,6 +14,13 @@ pipeline {
      }
 
     stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out Ranger repo...'
+                sh 'git clean -dfx'
+                checkout scm
+            }
+        }
         stage('Full Build') {
             when {
                 expression {params.action == 'full_build'}
